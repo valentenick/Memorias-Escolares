@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Balança da Vida — Molde | Memórias & Redações</title>
+    <meta name="description" content="Molde de portfólio: memórias escolares e produções textuais na balança da vida.">
+
+    <!-- Fontes clássicas -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Evita flash de tema errado -->
+    <script>
+        (function () {
+            const saved = localStorage.getItem('tema-advocacia');
+            document.documentElement.setAttribute('data-theme', saved || 'dark');
+        })();
+    </script>
+</head>
+<body>
+
+    <!-- Loader -->
+    <div id="page-loader" class="page-loader">
+        <div class="loader-inner">
+            <div class="loader-selo">⚖</div>
+            <div class="loader-text">Abrindo o processo...</div>
+            <div class="loader-progress"><span class="loader-bar"></span></div>
+            <div class="loader-pct" id="loader-pct">0%</div>
+        </div>
+    </div>
+
+    <div class="noise-overlay"></div>
+
+    <!-- =========================================================
+         GATE — tela cheia bloqueante. O cursor só inclina a balança;
+         quem abre uma seção é o CLIQUE.
+         ========================================================= -->
+    <div id="gate" class="gate" role="dialog" aria-modal="true" aria-labelledby="gate-titulo">
+        <div class="gate-decoration deco-esq" aria-hidden="true">MEMORIA</div>
+        <div class="gate-decoration deco-dir" aria-hidden="true">VERBUM</div>
+
+        <div class="gate-selo" aria-hidden="true">
+            <svg viewBox="0 0 100 100" class="selo-svg">
+                <circle cx="50" cy="50" r="46" class="selo-circ"/>
+                <circle cx="50" cy="50" r="38" class="selo-circ-int"/>
+                <text x="50" y="58" text-anchor="middle" class="selo-icone">⚖</text>
+            </svg>
+        </div>
+
+        <h1 id="gate-titulo" class="gate-titulo">A Balança da Vida</h1>
+        <p id="gate-subtitulo" class="gate-subtitulo">
+            Memórias de um lado. Palavras do outro.<br>
+            <em>Mova o cursor e clique no prato do seu lado.</em>
+        </p>
+
+        <!-- BALANÇA EM SVG -->
+        <svg id="balanca" class="balance-svg" viewBox="0 0 800 470" role="img"
+             aria-label="Balança da justiça. À esquerda: Memórias Escolares. À direita: Portfólio de Redações.">
+            <defs>
+                <linearGradient id="ouro" x1="0" y1="0" x2="1" y2="1">
+                    <stop offset="0%" stop-color="#F8E9B5"/>
+                    <stop offset="30%" stop-color="#D4AF37"/>
+                    <stop offset="65%" stop-color="#8C6A14"/>
+                    <stop offset="100%" stop-color="#E8CD74"/>
+                </linearGradient>
+                <linearGradient id="ouroVertical" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#F6E3A4"/>
+                    <stop offset="48%" stop-color="#C49A25"/>
+                    <stop offset="100%" stop-color="#795911"/>
+                </linearGradient>
+            </defs>
+
+            <ellipse cx="400" cy="447" rx="172" ry="11" class="balanca-sombra"/>
+            <path d="M298 438 L502 438 L478 410 L322 410 Z" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+            <rect x="330" y="398" width="140" height="14" rx="3" fill="url(#ouroVertical)" stroke="#6E5210" stroke-width="2"/>
+            <rect x="386" y="152" width="28" height="248" fill="url(#ouroVertical)" stroke="#6E5210" stroke-width="2"/>
+            <rect x="375" y="140" width="50" height="18" rx="4" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+            <path d="M368 140 Q400 110 432 140 Z" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+
+            <!-- BRAÇO -->
+            <g id="braco">
+                <path d="M120 140 L680 140" stroke="url(#ouro)" stroke-width="10" stroke-linecap="round"/>
+                <path d="M120 140 L680 140" stroke="#FFF6CE" stroke-width="2" stroke-linecap="round" opacity=".55"/>
+                <circle cx="150" cy="140" r="9" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+                <circle cx="650" cy="140" r="9" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+                <circle cx="400" cy="140" r="17" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+                <circle cx="400" cy="140" r="6" fill="#3A2A0A"/>
+                <path d="M400 158 L393 187 L407 187 Z" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+            </g>
+
+            <!-- PRATO ESQUERDO — Memórias (clicável) -->
+            <g transform="translate(150 140)">
+            <g id="prato-esquerdo" class="prato-clicavel" data-lado="memorias"
+               role="button" tabindex="0" aria-label="Escolher Memórias Escolares">
+                <ellipse class="halo" cx="0" cy="118" rx="96" ry="70"/>
+                <g class="correntes" stroke="url(#ouro)" stroke-width="2.5" fill="none">
+                    <path d="M0 0 L-64 104"/>
+                    <path d="M0 0 L64 104"/>
+                    <path d="M0 0 L0 116"/>
+                </g>
+                <g transform="translate(0 116)">
+                    <path d="M-72 0 Q0 54 72 0 Z" fill="url(#ouroVertical)" stroke="#6E5210" stroke-width="2.5"/>
+                    <ellipse cx="0" cy="0" rx="76" ry="9" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+                    <path d="M-70 2 Q0 50 70 2" fill="none" stroke="#FFF6CE" stroke-width="1.5" opacity=".45"/>
+                    <g class="placa">
+                        <rect x="-118" y="60" width="236" height="30" rx="2"/>
+                        <text x="0" y="80" text-anchor="middle" class="placa-texto">MEMÓRIAS ESCOLARES</text>
+                    </g>
+                </g>
+            </g>
+            </g>
+
+            <!-- PRATO DIREITO — Redações (clicável) -->
+            <g transform="translate(650 140)">
+            <g id="prato-direito" class="prato-clicavel" data-lado="redacoes"
+               role="button" tabindex="0" aria-label="Escolher Portfólio de Redações">
+                <ellipse class="halo" cx="0" cy="118" rx="96" ry="70"/>
+                <g class="correntes" stroke="url(#ouro)" stroke-width="2.5" fill="none">
+                    <path d="M0 0 L-64 104"/>
+                    <path d="M0 0 L64 104"/>
+                    <path d="M0 0 L0 116"/>
+                </g>
+                <g transform="translate(0 116)">
+                    <path d="M-72 0 Q0 54 72 0 Z" fill="url(#ouroVertical)" stroke="#6E5210" stroke-width="2.5"/>
+                    <ellipse cx="0" cy="0" rx="76" ry="9" fill="url(#ouro)" stroke="#6E5210" stroke-width="2"/>
+                    <path d="M-70 2 Q0 50 70 2" fill="none" stroke="#FFF6CE" stroke-width="1.5" opacity=".45"/>
+                    <g class="placa">
+                        <rect x="-120" y="60" width="240" height="30" rx="2"/>
+                        <text x="0" y="80" text-anchor="middle" class="placa-texto">PORTFÓLIO DE REDAÇÕES</text>
+                    </g>
+                </g>
+            </g>
+            </g>
+        </svg>
+
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <a href="#tribunal" class="logo">Balança<span> da Vida</span></a>
+        <nav class="nav-menu" aria-label="Navegação principal">
+            <a href="#tribunal">O Processo</a>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Alternar tema" title="Alternar tema">☀️</button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- MARQUEE -->
+        <div class="editorial-marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>⚖ A BALANÇA DA VIDA ✦ MEMÓRIAS ESCOLARES ✦ PORTFÓLIO DE REDAÇÕES ✦</span>
+                <span>⚖ A BALANÇA DA VIDA ✦ MEMÓRIAS ESCOLARES ✦ PORTFÓLIO DE REDAÇÕES ✦</span>
+            </div>
+        </div>
+
+        <!-- TRIBUNAL — barra de abas + painéis -->
+        <section id="tribunal" class="tribunal-section" aria-label="Seções escolhidas">
+            <div id="barra-navegacao" class="barra-navegacao oculta">
+                <div class="aba-tabs" role="tablist" aria-label="Escolher seção">
+                    <button class="aba-tab active" id="tab-memorias" role="tab" aria-selected="true" aria-controls="painel-memorias" data-aba="memorias">
+                        <span class="tab-icone">⚖</span> Memórias Escolares
+                    </button>
+                    <button class="aba-tab" id="tab-redacoes" role="tab" aria-selected="false" aria-controls="painel-redacoes" data-aba="redacoes">
+                        <span class="tab-icone">⚖</span> Portfólio de Redações
+                    </button>
+                </div>
+                <button id="voltar-balanca" class="voltar-balanca">⚖ Voltar à balança</button>
+            </div>
+
+            <div class="panel-stage">
+                <!-- ABAS: MEMÓRIAS ESCOLARES (sem imagens, só molde) -->
+                <section id="painel-memorias" class="aba-panel active" role="tabpanel" aria-labelledby="tab-memorias">
+                    <div class="panel-cabecalho reveal">
+                        <span class="panel-numero">I.</span>
+                        <h2 class="section-title">Memórias Escolares</h2>
+                        <p class="panel-placeholder">[ Espaço reservado para as memórias escolares com imagens. ]</p>
+                    </div>
+                    <div class="linha-tempo" id="memorias-grid">
+                        <!-- registros inseridos via JS -->
+                    </div>
+                </section>
+
+                <!-- ABAS: PORTFÓLIO DE REDAÇÕES (com imagens permitidas) -->
+                <section id="painel-redacoes" class="aba-panel" role="tabpanel" aria-labelledby="tab-redacoes" hidden>
+                    <div class="panel-cabecalho reveal">
+                        <span class="panel-numero">II.</span>
+                        <h2 class="section-title">Portfólio de Redações</h2>
+                        <p class="panel-placeholder">[ Espaço reservado para as redações — molde com imagens. ]</p>
+                    </div>
+
+                    <div class="processo-topo">
+                        <span class="processo etiqueta">CONSULTA AO PROCESSO</span>
+                        <span class="processo contador"><strong id="contador-pecas">17</strong> peças arquivadas</span>
+                    </div>
+
+                    <div class="controles reveal">
+                        <div class="busca-wrap">
+                            <span class="busca-icone" aria-hidden="true">⚲</span>
+                            <input type="text" id="busca-input" class="busca-input" placeholder="Pesquisar nos autos: título ou tema..." aria-label="Buscar redações">
+                            <span class="busca-dica" id="busca-dica"></span>
+                        </div>
+                        <div class="filtros" id="filtros" role="group" aria-label="Filtrar por tema">
+                            <span class="filtros-etiqueta">ÍNDICE:</span>
+                            <button class="filtro-btn active" data-filtro="all">Todas</button>
+                            <button class="filtro-btn" data-filtro="Meio Ambiente">Meio Ambiente</button>
+                            <button class="filtro-btn" data-filtro="Sociedade">Sociedade</button>
+                            <button class="filtro-btn" data-filtro="Tecnologia">Tecnologia</button>
+                            <button class="filtro-btn" data-filtro="Agro">Agro</button>
+                        </div>
+                        <div class="ordenar">
+                            <label for="ordem-select">Ordem de arquivamento:</label>
+                            <select id="ordem-select" class="ordem-select">
+                                <option value="default">Cronológica</option>
+                                <option value="titulo">Por título (A→Z)</option>
+                                <option value="tempo">Por extensão</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="autos" id="redacoes-grid">
+                        <!-- peças inseridas via JS -->
+                    </div>
+                </section>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal imersivo -->
+    <div id="modal-overlay" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+        <div class="modal-content">
+            <button id="modal-close" class="modal-close" aria-label="Fechar">✕</button>
+            <div class="modal-header">
+                <span class="modal-selo" aria-hidden="true">⚖</span>
+                <h3 id="modal-titulo" class="modal-title">Título</h3>
+                <p id="modal-tema" class="modal-tema">Tema</p>
+                <div class="modal-meta"><span id="modal-tempo" class="modal-tempo">Leitura: 0 min</span></div>
+            </div>
+            <div id="modal-texto" class="modal-texto" role="textbox" readonly></div>
+            <div class="modal-indicador" id="modal-indicador">Documento 1 de 6</div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p class="footer-frase">"Toda palavra tem peso. Cabe à balança decidir onde ela pousa."</p>
+        <p class="footer-credit">Molde · 2026 · Preencha os campos no <code>js/script.js</code></p>
+    </footer>
+
+    <!-- Bibliotecas -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+
+    <script>
+        // Se as bibliotecas não carregarem, o site continua legível e utilizável.
+        window.addEventListener('load', () => {
+            if (typeof gsap === 'undefined' || typeof Lenis === 'undefined') {
+                const loader = document.getElementById('page-loader');
+                if (loader) loader.remove();
+            }
+        });
+    </script>
+    <script src="js/script.js"></script>
+</body>
+</html>
